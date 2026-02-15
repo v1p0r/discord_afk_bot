@@ -1,0 +1,11 @@
+services:
+  afk-bot:
+    image: v1p0r/discord-afk-bot:latest
+    environment:
+      - DISCORD_TOKEN=your_token_here
+      - DEFAULT_VC_ID=your_default_vc_id_here
+      - COMMAND_PREFIX=!
+      - AUTO_JOIN=false
+      - SELF_MUTE=true
+      - SELF_DEAF=true
+    restart: unless-stopped
