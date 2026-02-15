@@ -156,12 +156,23 @@ async def cmd_status(ctx):
         channel = bot.get_channel(bot.state["target_channel_id"])
         channel_name = channel.name if channel else "unknown"
 
-        msg = f"Connected to #{channel_name} for {hours:02d}:{minutes:02d}:{seconds:02d}"
-        log.info("Status: %s", msg)
+        uptime_str = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+        msg = (
+            f"```ansi\n"
+            f"\x1b[1;32m[Connected]\x1b[0m to "
+            f"\x1b[1;34m#{channel_name}\x1b[0m for "
+            f"\x1b[1;35m{uptime_str}\x1b[0m\n"
+            f"```"
+        )
+        log.info("Status: Connected to #%s for %s", channel_name, uptime_str)
         await ctx.send(msg)
     else:
-        msg = "Not connected to any voice channel."
-        log.info("Status: %s", msg)
+        msg = (
+            f"```ansi\n"
+            f"\x1b[1;31m[Disconnected]\x1b[0m \u2014 not in any voice channel\n"
+            f"```"
+        )
+        log.info("Status: Disconnected")
         await ctx.send(msg)
 
 
